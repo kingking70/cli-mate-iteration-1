@@ -10,11 +10,11 @@ import { createSpinner } from "nanospinner";
 
 let playerName;
 
-const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms = 4000) => new Promise((r) => setTimeout(r, ms));
 
 async function welcome() {
     const rainbowTitle = chalkAnimation.rainbow(
-        'who wants to be a millionaire?'
+        'who wants to learn more about nuclear?'
     )
 
     await sleep();
@@ -23,7 +23,7 @@ async function welcome() {
     console.log(`
         ${chalk.bgBlue('HOW TO PLAY')}
         i am a process of your computer.
-        if you get any question wrong i will be ${chalk.bgRed('killed')}
+        if you get any question wrong i will be ${chalk.bgRed('obliterated from nuclear')}
         so get all the questions right... 
     `);
 }
@@ -37,7 +37,7 @@ async function handleAnswer(isCorrect) {
     if (isCorrect) {
         spinner.success({ text: `Nice work ${playerName}. That's a legit answer` });
     } else {
-        spinner.error({ text: `💀💀💀 Game over, you lose ${playerName}!` });
+        spinner.error({ text: `💀💀💀 Game over, you die ${playerName}!` });
         process.exit(1);
     }
 }
@@ -52,17 +52,17 @@ async function askName() {
     },
 });
 
-playerName = answers.player_name;
+    playerName = answers.player_name;
 }
 
 function winner() {
     console.clear();
-    figlet(`Congrats , ${playerName} !\n $ 1 , 0 0 0 , 0 0 0`, (err, data) => {
+    figlet(`Congrats, ${playerName}!`, (err, data) => {
         console.log(gradient.pastel.multiline(data) + '\n');
 
         console.log(
         chalk.green(
-            `Programming isn't about what you know; it's about making the command line look cool`
+            `you survived the holocaust and learnt more about nuclear. nuclear isn't as the media portrays; it's cleaner and more efficient than it sounds.`
         )
         );
         process.exit(0);
@@ -73,69 +73,71 @@ async function question1() {
 const answers = await inquirer.prompt({
     name: 'question_1',
     type: 'list',
-    message: 'JavaScript was created in 10 days then released on\n',
+    message: 'what is the best source of energy?\n',
     choices: [
-    'May 23rd, 1995',
-    'Nov 24th, 1995',
-    'Dec 4th, 1995',
-    'Dec 17, 1996',
+    'nuclear',
+    'solar',
+    'oil',
+    'wind',
     ],
 });
 
-return handleAnswer(answers.question_1 === 'Dec 4th, 1995');
+return handleAnswer(answers.question_1 === 'nuclear');
 }
 
 async function question2() {
     const answers = await inquirer.prompt({
         name: 'question_2',
         type: 'list',
-        message: 'What is x? var x = 1_1 + "1" + Number(1)\n',
-        choices: ['4', '"4"', '"1111"', '69420'],
+        message: 'why is nuclear the best source of energy?\n',
+        choices: ['because it\'s clean', 'because it\'s unbothered by the weather', 'because it doesn\'t take up much space', 'all of the above'],
     });
 
-    return handleAnswer(answers.question_2 === '"1111"');
+    return handleAnswer(answers.question_2 === 'all of the above');
 }
 
 async function question3() {
     const answers = await inquirer.prompt({
         name: 'question_3',
         type: 'list',
-        message: `What is the first element in the array? ['🐏', '🦙', '🐍'].length = 0\n`,
-        choices: ['0', '🐏', '🐍', 'undefined'],
+        message: `What is the equivalent of 1 uranium pallet?\n`,
+        choices: ['gummy bear', '2 oil barrels', '1,000 cubic feet of methane gas', '50kg of coal'],
     });
 
-    return handleAnswer(answers.question_3 === 'undefined');
+    return handleAnswer(answers.question_3 == 'gummy bear'); 
+    
 }
+
 
 async function question4() {
     const answers = await inquirer.prompt({
         name: 'question_4',
         type: 'list',
-        message: 'Which of the following is NOT a primitive type?\n',
+        message: 'What is the land use for nuclear per kwh compared to solar of 19m^2 and onshore wind of 99m^2\n',
         choices: [
-        'boolean',
-        'number',
-        'null',
-        'object', // Correct
+        '3m^2',
+        '0.3m^2',
+        '30m^2',
+        '300m^2', 
         ],
     });
 
-    return handleAnswer(answers.question_4 === 'object');
+    return handleAnswer(answers.question_4 === '0.3m^2');
 }
 
-async function question5() {
-    const answers = await inquirer.prompt({
-        name: 'question_5',
-        type: 'list',
-        message:
-        'JS is a high-level single-threaded, garbage-collected,\n' +
-        'interpreted(or just-in-time compiled), prototype-based,\n' +
-        'multi-paradigm, dynamic language with a ____ event loop\n',
-        choices: ['multi-threaded', 'non-blocking', 'synchronous', 'promise-based'],
-    });
+// async function question5() {
+//     const answers = await inquirer.prompt({
+//         name: 'question_5',
+//         type: 'list',
+//         message:
+//         'JS is a high-level single-threaded, garbage-collected,\n' +
+//         'interpreted(or just-in-time compiled), prototype-based,\n' +
+//         'multi-paradigm, dynamic language with a ____ event loop\n',
+//         choices: ['multi-threaded', 'non-blocking', 'synchronous', 'promise-based'],
+//     });
 
-    return handleAnswer(answers.question_5 === 'non-blocking');
-}
+//     return handleAnswer(answers.question_5 === 'non-blocking');
+// }
 
 // Run it with top-level await
 console.clear();
@@ -144,6 +146,7 @@ await askName();
 await question1();
 await question2();
 await question3();
+console.log(chalk.green('also equivalent to 3 oil barrels and 1 ton of coal!!'));
 await question4();
-await question5();
+// await question5();
 winner();
